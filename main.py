@@ -14,6 +14,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from ai_requests import extract_client_name
+
 # Telegram bot token
 TELEGRAM_BOT_TOKEN = '7767406326:AAFUFVyD1NkIoNAj7GhFdhkuogzBPvOFe4Y'
 
@@ -46,7 +48,9 @@ async def handle_audio(update: Update, context):
 
     try:
         text = transcribe_audio(file_path=file_path)
-        await update.message.reply_text(f"Transcribed text: {text}")
+        client_name = extract_client_name(text)
+        await update.message.reply_text(f"Ho trascritto: {text}")
+        await update.message.reply_text(f"Cerco {client_name} su Notion...")
     except Exception:
         await update.message.reply_text("Sorry, I could not understand the audio.")
     
