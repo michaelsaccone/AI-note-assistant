@@ -1,0 +1,18 @@
+[project]
+name = "telegram-sr-bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "datasets>=3.2.0",
+    "langchain>=0.3.17",
+    "notion-client>=2.3.0",
+    "ollama>=0.4.7",
+    "pydub>=0.25.1",
+    "python-dotenv>=1.0.1",
+    "python-telegram-bot>=21.10",
+    "speechrecognition>=3.14.1",
+    "torch>=2.6.0",
+    "transformers>=4.48.2",
+]

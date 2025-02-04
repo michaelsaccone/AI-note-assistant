@@ -1,0 +1,6 @@
+
+
+TEXT_EXTRACTION_PROMPT = """
+
+
+"""
