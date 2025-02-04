@@ -1,12 +1,7 @@
-import os
 import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters
-import speech_recognition as sr
-from pydub import AudioSegment
-import torch
 from transformers import pipeline
-from datasets import load_dataset
 from notion_client import Client as NotionClient
 
 import os
@@ -14,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from ai_requests import extract_client_name
+from core.ai_pipelines.ai_requests import extract_client_name
 
 # Telegram bot token
 TELEGRAM_BOT_TOKEN = '7767406326:AAFUFVyD1NkIoNAj7GhFdhkuogzBPvOFe4Y'

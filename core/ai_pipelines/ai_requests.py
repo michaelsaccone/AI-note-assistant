@@ -1,12 +1,10 @@
 import os
 
-from langchain.chains import LLMChain
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.messages import HumanMessage, SystemMessage
-from llm_prompts import TEXT_EXTRACTION_PROMPT
+from core.ai_pipelines.llm_prompts import TEXT_EXTRACTION_PROMPT
 
 def get_llm_model(model_name):
     if 'gpt' in model_name:
@@ -24,8 +22,8 @@ extraction_template = ChatPromptTemplate([
     ('system', TEXT_EXTRACTION_PROMPT),
     ('user', '{user_message}')
 ])
+extraction_chain = extraction_template | client_extractor_llm | StrOutputParser()
 
 def extract_client_name(user_message):
-    chain = extraction_template | client_extractor_llm | StrOutputParser()
-    client_name = chain.invoke({"user_message": user_message})
+    client_name = extraction_chain.invoke({"user_message": user_message})
     return client_name
