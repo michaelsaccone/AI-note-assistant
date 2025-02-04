@@ -9,15 +9,15 @@ Prompt templates for the pipeline steps:
 
 """
 Variables you can use in the templates: 
-extraction prompt:  ${user_message}
-action reasoning: ${user_message} ${client_name}
-tool caller: ${user_message} ${reasoned_steps} ${client_name}
-note writer: ${user_message} ${reasoned_steps} ${client_name}
+extraction prompt:  {user_message}
+action reasoning: {user_message} {client_name}
+tool caller: {user_message} {reasoned_steps} {client_name}
+note writer: {user_message} {reasoned_steps} {client_name}
 """
 
 
 TEXT_EXTRACTION_PROMPT = """
-
+{user_message}
 """
 
 ACTION_REASONING_PROMPT = """
