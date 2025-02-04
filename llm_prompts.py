@@ -15,15 +15,18 @@ tool caller: {user_message} {reasoned_steps} {client_name}
 note writer: {user_message} {reasoned_steps} {client_name}
 """
 
-
-TEXT_EXTRACTION_PROMPT = """
-{user_message}
+user_message = "{user_message}"
+TEXT_EXTRACTION_PROMPT = f"""
+I want you to extract the subject from the sentence I write here below. You have to write only the business name, without any additional explanations or comments.
+Do not add any word to complete the name, extract only the words used in the text I give you as input.
 """
 
-ACTION_REASONING_PROMPT = """
+client_name = "{client_name}"
+ACTION_REASONING_PROMPT = f"""
 
 """
 
+reasoned_steps = "{reasoned_steps}"
 TOOL_CALLER_PROMPT = """
 
 
