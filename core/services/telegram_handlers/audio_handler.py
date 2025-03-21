@@ -6,10 +6,36 @@ from core.ai_pipelines.chains.text_note_organiser import NoteInfo
 from core.ai_pipelines.chains.speech_recognition import transcribe_audio
 from core.services.notion_search import get_notion_search_service
 from core.services.notion_search_service import add_note_block
+from core.database.models import TelegramUser
+from core.database import get_db
 
 logger = logging.getLogger(__name__)
 
 async def handle_audio(update: Update, context):
+    # Check user permissions
+    user = update.effective_user
+    db = next(get_db())
+    db_user = db.query(TelegramUser).filter(TelegramUser.telegram_id == user.id).first()
+    
+    if not db_user:
+        # Create new user without permission
+        db_user = TelegramUser(
+            telegram_id=user.id,
+            username=user.username,
+            first_name=user.first_name,
+            last_name=user.last_name,
+            has_permission=False
+        )
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+    
+    if not db_user.has_permission:
+        await update.message.reply_text(
+            "Sorry, you don't have permission to use this bot. Please wait for an administrator to grant you access."
+        )
+        return
+
     await update.message.reply_text(f"Sto analizzando il tuo audio...")
     # Get the audio file
     audio_file = await update.message.voice.get_file()

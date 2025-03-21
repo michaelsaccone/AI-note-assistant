@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from datetime import datetime, UTC
 from pgvector.sqlalchemy import Vector
 from sqlalchemy.ext.declarative import declarative_base
@@ -18,3 +18,16 @@ class NotionItem(Base):
 
     def __repr__(self):
         return f"<NotionItem(page_id='{self.page_id}', name='{self.name}')>"
+
+class TelegramUser(Base):
+    __tablename__ = "telegram_users"
+
+    telegram_id = Column(Integer, primary_key=True, index=True)
+    username = Column(String)
+    first_name = Column(String)
+    last_name = Column(String)
+    has_permission = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+
+    def __repr__(self):
+        return f"<TelegramUser(telegram_id={self.telegram_id}, username='{self.username}')>"
