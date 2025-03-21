@@ -10,7 +10,7 @@ def get_llm_model(model_name):
         model = ChatOllama(model=model_name, temperature=0.4)
     return model
 
-client_extractor_llm = get_llm_model(os.environ['CLIENT_EXTRACTOR_MODEL_NAME'])
+# client_extractor_llm = get_llm_model(os.environ['CLIENT_EXTRACTOR_MODEL_NAME'])
 reasoner_llm = get_llm_model(os.environ['REASONER_MODEL_NAME'])
 tool_caller_llm = get_llm_model(os.environ['TOOL_CALLER_MODEL_NAME'])
 writer_llm = get_llm_model(os.environ['WRITER_MODEL_NAME'])

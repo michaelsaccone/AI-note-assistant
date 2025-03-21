@@ -1,0 +1,34 @@
+services:
+  python_app:
+#    image: ai-assistant
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    ports:
+#      - "8000:8000"
+    volumes:
+      - ./huggingface_cache:/app/huggingface
+    environment:
+      - HF_HOME=/app/huggingface
+      - OLLAMA_HOST=ollama
+#    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - ollama
+    networks:
+      - app_network
+
+  ollama:
+    image: ollama/ollama:latest
+#    ports:
+#      - "11434:11434"
+    volumes:
+      - ./ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,30 @@
+# API Keys for LLM services
+llm_api_keys:
+  mistral: ${MISTRAL_API_KEY}
+  openai: ${OPENAI_API_KEY}
+
+# Notion configuration
+notion:
+  api_key: ${NOTION_API_KEY}
+  database_id: ${NOTION_DATABASE_ID}
+
+# Telegram configuration
+telegram:
+  bot_token: ${TELEGRAM_BOT_TOKEN}
+
+# Model names for different services
+model_names:
+  embedding: "mistral-embed"
+  reasoner: ${REASONER_MODEL_NAME}
+  tool_caller: ${TOOL_CALLER_MODEL_NAME}
+  writer: ${WRITER_MODEL_NAME}
+
+# Search service configuration
+search:
+  similarity_threshold: 0.7
+  max_results: 5
+  sync_batch_size: 100
+
+# Database configuration
+database:
+  url: ${DATABASE_URL}
